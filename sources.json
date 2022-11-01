@@ -9019,5 +9019,27 @@
       "version": "0.9.1",
       "sha256": "8c473082b4f0f819f1da05de2dbd0c1e891dff7d85d2c12b6ee876887d438287"
     }
+  },
+  "0.10.0": {
+    "aarch64-linux": {
+      "url": "https://ziglang.org/download/0.10.0/zig-linux-aarch64-0.10.0.tar.xz",
+      "sha256": "09ef50c8be73380799804169197820ee78760723b0430fa823f56ed42b06ea0f",
+      "version": "0.10.0"
+    },
+    "x86_64-linux": {
+      "url": "https://ziglang.org/download/0.10.0/zig-linux-x86_64-0.10.0.tar.xz",
+      "sha256": "631ec7bcb649cd6795abe40df044d2473b59b44e10be689c15632a0458ddea55",
+      "version": "0.10.0"
+    },
+    "aarch64-darwin": {
+      "url": "https://ziglang.org/download/0.10.0/zig-macos-aarch64-0.10.0.tar.xz",
+      "sha256": "02f7a7839b6a1e127eeae22ea72c87603fb7298c58bc35822a951479d53c7557",
+      "version": "0.10.0"
+    },
+    "x86_64-darwin": {
+      "url": "https://ziglang.org/download/0.10.0/zig-macos-x86_64-0.10.0.tar.xz",
+      "sha256": "3a22cb6c4749884156a94ea9b60f3a28cf4e098a69f08c18fbca81c733ebfeda",
+      "version": "0.10.0"
+    }
   }
 }
