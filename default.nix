@@ -30,9 +30,38 @@
 
       pname = "zig";
       src = pkgs.fetchurl {inherit urls sha256;};
-      dontConfigure = true;
-      dontBuild = true;
-      dontFixup = true;
+      strictDeps = true;
+      setupHook = "${nixpkgs}/pkgs/development/compilers/zig/setup-hook.sh";
+      env = {
+        # This zig_default_optimize_flag below is meant to avoid CPU feature impurity in
+        # Nixpkgs. However, this flagset is "unstable": it is specifically meant to
+        # be controlled by the upstream development team - being up to that team
+        # exposing or not that flags to the outside (especially the package manager
+        # teams).
+
+        # Because of this hurdle, @andrewrk from Zig Software Foundation proposed
+        # some solutions for this issue. Hopefully they will be implemented in
+        # future releases of Zig. When this happens, this flagset should be
+        # revisited accordingly.
+
+        # Below are some useful links describing the discovery process of this 'bug'
+        # in Nixpkgs:
+
+        # https://github.com/NixOS/nixpkgs/issues/169461
+        # https://github.com/NixOS/nixpkgs/issues/185644
+        # https://github.com/NixOS/nixpkgs/pull/197046
+        # https://github.com/NixOS/nixpkgs/pull/241741#issuecomment-1624227485
+        # https://github.com/ziglang/zig/issues/14281#issuecomment-1624220653
+        zig_default_cpu_flag = "-Dcpu=baseline";
+
+        zig_default_optimize_flag =
+          if lib.versionAtLeast finalAttrs.version "0.12" then
+            "--release=safe"
+          else if lib.versionAtLeast finalAttrs.version "0.11" then
+            "-Doptimize=ReleaseSafe"
+          else
+            "-Drelease-safe=true";
+      };
       installPhase = ''
         mkdir -p $out/{doc,bin,lib}
         [ -d docs ] && cp -r docs/* $out/doc
