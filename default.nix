@@ -12,7 +12,7 @@
     url,
     version,
     sha256,
-    platforms ? [system],
+    platforms,
   }: let
     tarballName = lib.lists.last (lib.strings.split "/" url);
     srcIsFromZigLang = lib.strings.hasPrefix "https://ziglang.org/" url;
